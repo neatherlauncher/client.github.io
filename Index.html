@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battle Arena – Flag Wars</title>
+  <meta name="description" content="A physics-based battle arena where country flags fight to be the last one standing. Select up to 10 countries and watch the battle unfold!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="Index.css" />
+</head>
+<body>
+  <!-- ===== CONTROL PANEL ===== -->
+  <aside id="control-panel" class="control-panel">
+    <div class="panel-header">
+      <div class="panel-logo">
+        <span class="logo-icon">⚔️</span>
+        <span class="logo-text">Flag Wars</span>
+      </div>
+      <div class="header-actions">
+        <button id="mute-btn" class="mute-btn" title="Toggle Sound">
+          <span class="mute-icon">🔊</span>
+        </button>
+        <button id="toggle-panel-btn" class="toggle-panel-btn" title="Toggle Panel">◀</button>
+      </div>
+    </div>
+
+    <!-- Player List -->
+    <section class="panel-section" id="player-list-section">
+      <h2 class="section-title">
+        <span class="section-icon">🏆</span> Fighters
+        <span id="player-count-badge" class="count-badge">0/10</span>
+      </h2>
+      <div id="player-list" class="player-list">
+        <p class="empty-hint">Add fighters below ↓</p>
+      </div>
+    </section>
+
+    <!-- Country Selector -->
+    <section class="panel-section" id="country-selector-section">
+      <h2 class="section-title">
+        <span class="section-icon">🌍</span> Add Fighter
+      </h2>
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="country-search"
+          class="country-search"
+          placeholder="Search country..."
+          autocomplete="off"
+        />
+      </div>
+      <div id="country-dropdown" class="country-dropdown"></div>
+    </section>
+
+    <!-- Controls -->
+    <section class="panel-section controls-section">
+      <div class="slider-wrapper">
+        <label for="speed-slider" class="section-title"><span class="section-icon">⏩</span> Battle Speed</label>
+        <input type="range" id="speed-slider" min="0.2" max="3" step="0.1" value="1" class="speed-slider">
+      </div>
+      <button id="play-btn" class="btn btn-play" disabled>
+        <span class="btn-icon">▶</span>
+        <span class="btn-label">Start Battle</span>
+      </button>
+      <button id="reset-btn" class="btn btn-reset">
+        <span class="btn-icon">↺</span>
+        <span class="btn-label">Reset</span>
+      </button>
+    </section>
+
+    <!-- Legend -->
+    <section class="panel-section legend-section">
+      <h2 class="section-title"><span class="section-icon">📦</span> Power-ups</h2>
+      <div class="legend-grid">
+        <div class="legend-item"><span class="legend-icon spike-icon">🔺</span> Spikes</div>
+        <div class="legend-item"><span class="legend-icon gun-icon">🔫</span> Gun</div>
+        <div class="legend-item"><span class="legend-icon shield-icon">🛡️</span> Shield</div>
+        <div class="legend-item"><span class="legend-icon bomb-icon">💣</span> Bomb</div>
+      </div>
+    </section>
+  </aside>
+
+  <!-- ===== ARENA WRAPPER ===== -->
+  <main id="arena-wrapper" class="arena-wrapper">
+    <!-- Winner Overlay -->
+    <div id="winner-overlay" class="winner-overlay hidden">
+      <div class="winner-card">
+        <div class="winner-crown">👑</div>
+        <div id="winner-flag-display" class="winner-flag-display"></div>
+        <h1 id="winner-name" class="winner-name">—</h1>
+        <p class="winner-sub">Champion of the Arena!</p>
+        <button id="play-again-btn" class="btn btn-play-again">Play Again</button>
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <canvas id="arena-canvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" class="hud hidden">
+      <div id="hud-alive" class="hud-stat">
+        <span class="hud-label">Alive</span>
+        <span id="hud-alive-count" class="hud-value">0</span>
+      </div>
+      <div id="hud-time" class="hud-stat">
+        <span class="hud-label">Time</span>
+        <span id="hud-time-value" class="hud-value">0s</span>
+      </div>
+      <div id="hud-items" class="hud-stat">
+        <span class="hud-label">Items</span>
+        <span id="hud-items-count" class="hud-value">0</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="Index.js"></script>
+</body>
+</html>
