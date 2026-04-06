@@ -64,33 +64,67 @@ body {
   width: 100vw;
 }
 
+/* ── Menu Button ── */
+.menu-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 150;
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+.menu-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+.menu-btn.hidden {
+  display: none;
+}
+
 /* ===========================
-   CONTROL PANEL
+   CONTROL PANEL (POPUP OVERLAY)
    =========================== */
 .control-panel {
-  position: relative;
-  width: var(--panel-width);
-  min-width: var(--panel-width);
-  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 340px;
+  max-width: 90vw;
+  height: 85vh;
+  max-height: 800px;
   background: linear-gradient(180deg, #0d1117 0%, #070a10 100%);
-  border-right: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   gap: 0;
   overflow: hidden;
-  transition: width var(--transition), min-width var(--transition);
-  z-index: 100;
-  box-shadow: 4px 0 32px rgba(0,0,0,0.5);
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 500;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 0 100vw rgba(0,0,0,0.6);
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.control-panel.collapsed {
-  width: var(--panel-collapsed);
-  min-width: var(--panel-collapsed);
-}
-
-.control-panel.collapsed .panel-section,
-.control-panel.collapsed .logo-text {
+.control-panel.hidden {
   opacity: 0;
+  transform: translate(-50%, -45%) scale(0.95);
   pointer-events: none;
 }
 
@@ -124,7 +158,7 @@ body {
   transition: opacity var(--transition);
 }
 
-.toggle-panel-btn {
+.close-panel-btn {
   background: var(--bg-glass);
   border: 1px solid var(--border);
   color: var(--text-secondary);
@@ -132,7 +166,7 @@ body {
   height: 28px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   transition: all var(--transition);
   flex-shrink: 0;
   display: flex;
@@ -164,9 +198,7 @@ body {
 .mute-btn:hover { background: var(--bg-glass-hover); color: var(--text-primary); }
 .mute-btn.muted { color: var(--red); border-color: var(--red-dim); }
 
-.toggle-panel-btn:hover { background: var(--bg-glass-hover); color: var(--text-primary); }
-.control-panel.collapsed .toggle-panel-btn { transform: rotate(180deg); }
-.control-panel.collapsed .mute-btn { display: none; }
+.close-panel-btn:hover { background: var(--bg-glass-hover); color: var(--red); border-color: var(--red-dim); }
 
 /* Panel Sections */
 .panel-section {
@@ -637,25 +669,7 @@ body {
 /* ===========================
    RESPONSIVE
    =========================== */
-@media (max-width: 768px) {
-  :root {
-    --panel-width: 260px;
-  }
-}
-
-@media (max-width: 540px) {
-  .control-panel {
-    position: absolute;
-    height: 100vh;
-    z-index: 300;
-    transform: translateX(0);
-    transition: transform var(--transition), width var(--transition);
-  }
-
-  .control-panel.collapsed {
-    transform: translateX(calc(-100% + var(--panel-collapsed)));
-  }
-}
+/* ── Responsive removed specific side panel translations ── */
 
 /* ── Damage flash ── */
 @keyframes damageFlash { 0%,100% { opacity:1; } 50% { opacity:0.3; } }

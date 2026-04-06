@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Battle Arena – Flag Wars</title>
   <meta name="description" content="A physics-based battle arena where country flags fight to be the last one standing. Select up to 10 countries and watch the battle unfold!" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,8 +11,17 @@
   <link rel="stylesheet" href="Index.css" />
 </head>
 <body>
+  <!-- Menu Button -->
+  <button id="menu-btn" class="menu-btn" title="Open Menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="5" r="2"></circle>
+      <circle cx="12" cy="12" r="2"></circle>
+      <circle cx="12" cy="19" r="2"></circle>
+    </svg>
+  </button>
+
   <!-- ===== CONTROL PANEL ===== -->
-  <aside id="control-panel" class="control-panel">
+  <aside id="control-panel" class="control-panel hidden">
     <div class="panel-header">
       <div class="panel-logo">
         <span class="logo-icon">⚔️</span>
@@ -22,7 +31,7 @@
         <button id="mute-btn" class="mute-btn" title="Toggle Sound">
           <span class="mute-icon">🔊</span>
         </button>
-        <button id="toggle-panel-btn" class="toggle-panel-btn" title="Toggle Panel">◀</button>
+        <button id="close-panel-btn" class="close-panel-btn" title="Close Panel">✖</button>
       </div>
     </div>
 

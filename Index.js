@@ -164,7 +164,8 @@ SoundManager.init();
 const canvas = document.getElementById('arena-canvas');
 const ctx = canvas.getContext('2d');
 const controlPanel = document.getElementById('control-panel');
-const toggleBtn = document.getElementById('toggle-panel-btn');
+const menuBtn = document.getElementById('menu-btn');
+const closeBtn = document.getElementById('close-panel-btn');
 const muteBtn = document.getElementById('mute-btn');
 const playerListEl = document.getElementById('player-list');
 const countBadgeEl = document.getElementById('player-count-badge');
@@ -232,7 +233,8 @@ function spawnFX(x, y, count = 10, type = 'spark') {
     }
 }
 
-toggleBtn.onclick = () => controlPanel.classList.toggle('collapsed');
+menuBtn.onclick = () => controlPanel.classList.remove('hidden');
+closeBtn.onclick = () => controlPanel.classList.add('hidden');
 muteBtn.onclick = () => SoundManager.toggleMute();
 speedSlider.oninput = () => timeScale = parseFloat(speedSlider.value);
 
@@ -295,14 +297,20 @@ function resize() {
     if (!wrapper) return;
     const w = wrapper.clientWidth, h = wrapper.clientHeight;
     const s = Math.min(w, h) * 0.94;
+    const dpr = window.devicePixelRatio || 1;
 
     // Store old values for coordinate re-mapping
     lastArenaRadius = arenaRadius || s / 2 - 15;
     lastArenaCenterX = arenaCenterX || s / 2;
     lastArenaCenterY = arenaCenterY || s / 2;
 
-    canvas.width = canvas.height = s;
-    arenaCenterX = arenaCenterY = s / 2;
+    canvas.width = s * dpr;
+    canvas.height = s * dpr;
+    canvas.style.width = s + 'px';
+    canvas.style.height = s + 'px';
+
+    arenaCenterX = s / 2;
+    arenaCenterY = s / 2;
     arenaRadius = s / 2 - 15;
 
     // Dynamic Scaling (Requirement #1)
@@ -388,7 +396,7 @@ function startGame() {
     loop();
 }
 
-playBtn.onclick = startGame;
+playBtn.onclick = () => { startGame(); controlPanel.classList.add('hidden'); };
 resetBtn.onclick = () => location.reload();
 playAgainBtn.onclick = startGame;
 
@@ -672,7 +680,14 @@ function endGame(winner) {
 }
 
 function render() {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+
+    const dpr = window.devicePixelRatio || 1;
+    ctx.save();
+    ctx.scale(dpr, dpr);
 
     // Arena floor
     ctx.beginPath(); ctx.arc(arenaCenterX, arenaCenterY, arenaRadius + 8, 0, Math.PI * 2);
@@ -797,11 +812,23 @@ function render() {
         ctx.fill();
     });
     ctx.globalAlpha = 1.0;
+    
+    ctx.restore(); // Restore dpr scale
 }
 
 function drawIdle() {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+
+    const dpr = window.devicePixelRatio || 1;
+    ctx.save();
+    ctx.scale(dpr, dpr);
+
     ctx.beginPath(); ctx.arc(arenaCenterX, arenaCenterY, arenaRadius, 0, Math.PI * 2);
     ctx.strokeStyle = 'rgba(255,255,255,0.08)'; ctx.stroke();
+    
+    ctx.restore();
 }
 renderUI();
