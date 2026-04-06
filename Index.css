@@ -104,9 +104,9 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
-  width: 340px;
-  max-width: 90vw;
-  height: 85vh;
+  width: 95vw;
+  max-width: 480px;
+  height: 90vh;
   max-height: 800px;
   background: linear-gradient(180deg, #0d1117 0%, #070a10 100%);
   border: 1px solid var(--border-strong);
@@ -234,15 +234,20 @@ body {
 }
 
 /* ── Player List ── */
-#player-list-section { flex: 1 1 auto; overflow-y: auto; min-height: 0; }
+#player-list-section { 
+  flex: 1 1 50%; 
+  overflow-y: auto; 
+  min-height: 150px; 
+} 
 
 .player-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
 .empty-hint {
+  grid-column: 1 / -1;
   color: var(--text-muted);
   font-size: 13px;
   text-align: center;
@@ -253,12 +258,13 @@ body {
   background: var(--bg-glass);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   transition: all var(--transition);
   animation: slideIn 0.2s ease;
+  min-width: 0;
 }
 
 @keyframes slideIn {
@@ -358,13 +364,23 @@ body {
 }
 .country-search::placeholder { color: var(--text-muted); }
 
-/* Country Dropdown */
-.country-dropdown {
-  max-height: 200px;
-  overflow-y: auto;
+/* Country Selector */
+#country-selector-section {
+  flex: 1 1 50%;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  min-height: 150px;
+  overflow: hidden;
+}
+
+/* Country Dropdown */
+.country-dropdown {
+  flex: 1;
+  max-height: none;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
 }
 
 .country-option {
@@ -410,7 +426,19 @@ body {
 .controls-section {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+}
+
+.button-row {
+  display: flex;
   gap: 8px;
+}
+
+.button-row .btn {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 13px;
+  min-width: 0;
 }
 
 .btn {
@@ -591,6 +619,7 @@ body {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .winner-card {
+  position: relative;
   text-align: center;
   padding: 48px 56px;
   background: linear-gradient(145deg, rgba(13,17,23,0.95), rgba(7,9,15,0.98));
@@ -601,6 +630,28 @@ body {
     0 32px 80px rgba(0,0,0,0.6),
     0 0 60px rgba(249,115,22,0.12);
   animation: popIn 0.5s cubic-bezier(.175,.885,.32,1.275);
+}
+
+.close-winner-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-winner-btn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
 }
 
 @keyframes popIn {

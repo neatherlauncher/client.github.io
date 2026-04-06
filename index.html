@@ -70,26 +70,19 @@
         <label for="speed-slider" class="section-title"><span class="section-icon">⏩</span> Battle Speed</label>
         <input type="range" id="speed-slider" min="0.2" max="3" step="0.1" value="1" class="speed-slider">
       </div>
-      <button id="play-btn" class="btn btn-play" disabled>
-        <span class="btn-icon">▶</span>
-        <span class="btn-label">Start Battle</span>
-      </button>
-      <button id="reset-btn" class="btn btn-reset">
-        <span class="btn-icon">↺</span>
-        <span class="btn-label">Reset</span>
-      </button>
-    </section>
-
-    <!-- Legend -->
-    <section class="panel-section legend-section">
-      <h2 class="section-title"><span class="section-icon">📦</span> Power-ups</h2>
-      <div class="legend-grid">
-        <div class="legend-item"><span class="legend-icon spike-icon">🔺</span> Spikes</div>
-        <div class="legend-item"><span class="legend-icon gun-icon">🔫</span> Gun</div>
-        <div class="legend-item"><span class="legend-icon shield-icon">🛡️</span> Shield</div>
-        <div class="legend-item"><span class="legend-icon bomb-icon">💣</span> Bomb</div>
+      <div class="button-row">
+        <button id="play-btn" class="btn btn-play" disabled>
+          <span class="btn-icon">▶</span>
+          <span class="btn-label">Start Battle</span>
+        </button>
+        <button id="reset-btn" class="btn btn-reset">
+          <span class="btn-icon">↺</span>
+          <span class="btn-label">Reset</span>
+        </button>
       </div>
     </section>
+
+    <!-- Legend removed - power-ups section no longer listed in panel -->
   </aside>
 
   <!-- ===== ARENA WRAPPER ===== -->
@@ -97,6 +90,7 @@
     <!-- Winner Overlay -->
     <div id="winner-overlay" class="winner-overlay hidden">
       <div class="winner-card">
+        <button id="close-winner-btn" class="close-winner-btn" title="Close">✖</button>
         <div class="winner-crown">👑</div>
         <div id="winner-flag-display" class="winner-flag-display"></div>
         <h1 id="winner-name" class="winner-name">—</h1>

@@ -178,6 +178,7 @@ const winnerOverlay = document.getElementById('winner-overlay');
 const winnerName = document.getElementById('winner-name');
 const winnerFlagEl = document.getElementById('winner-flag-display');
 const playAgainBtn = document.getElementById('play-again-btn');
+const closeWinnerBtn = document.getElementById('close-winner-btn');
 const hud = document.getElementById('hud');
 const hudAlive = document.getElementById('hud-alive-count');
 const hudTime = document.getElementById('hud-time-value');
@@ -235,6 +236,7 @@ function spawnFX(x, y, count = 10, type = 'spark') {
 
 menuBtn.onclick = () => controlPanel.classList.remove('hidden');
 closeBtn.onclick = () => controlPanel.classList.add('hidden');
+closeWinnerBtn.onclick = () => winnerOverlay.classList.add('hidden');
 muteBtn.onclick = () => SoundManager.toggleMute();
 speedSlider.oninput = () => timeScale = parseFloat(speedSlider.value);
 
